@@ -10,11 +10,11 @@ const theme = extendTheme({
      styles: {
         global: {
         body: {
-            bg: "white", // Set body background to black
+            bg: "#f5f5f5", // Set body background to black
             color: "black", // Optional: make text readable
         },
         html: {
-            bg: "white", // Also apply to html
+            bg: "#f5f5f5", // Also apply to html
         },
         },
     }

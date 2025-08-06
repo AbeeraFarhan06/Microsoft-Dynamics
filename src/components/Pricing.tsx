@@ -26,9 +26,9 @@ const pricingPlans = [
 
 const PricingSection = () => {
   return (
-    <Box bg="#f5f5f5" py={12} p={16}>
+    <Box  py={10} p={12} mt={10}>
       <Stack spacing={4} textAlign="center" mb={10}>
-        <Text color="#a9a8a8" fontWeight="semibold">
+        <Text color="#a9a8a8" fontWeight="semibold" textTransform="uppercase" fontSize="sm">
           Pricing
         </Text>
         <Heading fontSize="4xl" fontWeight="semibold" color="gray.800">

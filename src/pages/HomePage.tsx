@@ -1,4 +1,6 @@
 import { Grid, GridItem } from '@chakra-ui/react';
+import Pricing from '../components/Pricing';
+import Partners from '../components/Partners';
 
 const HomePage = () => {
   return (
@@ -13,6 +15,8 @@ const HomePage = () => {
       }}
     >
       <GridItem area="main">
+       <Pricing />
+       <Partners />
       </GridItem>
     </Grid>
   );
