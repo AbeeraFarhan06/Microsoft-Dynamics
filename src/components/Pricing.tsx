@@ -28,7 +28,10 @@ const PricingSection = () => {
   return (
     <Box bg="#f5f5f5" py={12} p={16}>
       <Stack spacing={4} textAlign="center" mb={10}>
-        <Heading fontSize="3xl" fontWeight="bold" color="gray.800">
+        <Text color="#a9a8a8" fontWeight="semibold">
+          Pricing
+        </Text>
+        <Heading fontSize="4xl" fontWeight="semibold" color="gray.800">
           Dynamics 365 Sales pricing
         </Heading>
         <Button
@@ -36,46 +39,47 @@ const PricingSection = () => {
           color="white"
           fontWeight="semibold"
           fontSize="14px"
-          px={6}
-          py={2}
+          px={4}
+          py={6}
           borderRadius="md"
           _hover={{ bg: '#243B65' }}
           alignSelf="center"
+          mt={5}
         >
           See pricing details
         </Button>
       </Stack>
 
-      <SimpleGrid columns={{ base: 1, md: 3 }} spacing={8}>
+      <SimpleGrid columns={{ base: 1, md: 3 }} spacing={7}>
         {pricingPlans.map((plan) => (
           <Box
             key={plan.title}
             bg="white"
-            borderRadius="xl"
+            borderRadius="20px"
             p={6}
-            boxShadow="md"
+            boxShadow="lg"
             textAlign="left"
           >
-            <Text fontSize="lg" fontWeight="semibold" mb={2}>
+            <Text fontSize="lg" fontWeight="semibold" mb={4}>
               {plan.title}
             </Text>
-            <Text fontSize="sm" color="gray.600" mb={6}>
+            <Text fontSize="16px" color="black" mb="80px">
               {plan.description}
             </Text>
-            <Text fontSize="2xl" fontWeight="bold" mb={1}>
+            <Text fontSize="4xl" fontWeight="semibold" mb={1}>
               {plan.price}
             </Text>
-            <Text fontSize="sm" color="gray.600" mb={6}>
+            <Text fontSize="sm" fontWeight="semibold" color="black" mb={8}>
               {plan.subtext}
             </Text>
-            <Stack direction="row" spacing={4}>
+            <Stack direction="row" spacing={2}>
               {plan.buttons.includes('Buy now') && (
                 <Button
                   bg="#2F4B7C"
                   color="white"
                   fontSize="14px"
-                  px={4}
-                  py={2}
+                  px={5}
+                  py="26px"
                   borderRadius="md"
                   _hover={{ bg: '#243B65' }}
                 >
@@ -87,9 +91,10 @@ const PricingSection = () => {
                 borderColor="#2F4B7C"
                 color="#2F4B7C"
                 fontSize="14px"
-                px={4}
-                py={2}
+                px={5}
+                py={6}
                 borderRadius="md"
+                borderWidth="2px"
                 _hover={{ bg: '#e6eaf3' }}
               >
                 Contact us
