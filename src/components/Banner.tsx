@@ -1,14 +1,21 @@
-import { Image } from '@chakra-ui/react'
+import { Box, Flex, Heading, Text } from '@chakra-ui/react'
 import dynamics_banner from '../assets/dynamics_banner.avif'
+import HeroBanner from './HeroBanner'
 
 const Banner = () => {
   return (
-    <Image 
-      src={dynamics_banner}
-      w="100vw"           
-      h="510px"
-      objectFit="cover" 
-    />
+    <Box
+      bgImage={dynamics_banner}
+        bgSize="cover"
+        bgPosition="top"
+        bgRepeat="no-repeat"
+        width="100%"
+        height="513px"
+        position="relative"
+        zIndex="0"
+    >
+     <HeroBanner />
+    </Box>
   )
 }
 

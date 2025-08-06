@@ -84,7 +84,7 @@ const Navbar = () => {
 
   return (
     <Box px={0} py={1} position="sticky" zIndex={1000} pt="2px" bg="white">
-      <Flex direction="column" gap={3}>
+      <Flex direction="column" gap="18px">
         {isDesktop ? (
           // ✅ Desktop Navbar
           <Box px="73px">
