@@ -15,8 +15,15 @@ import forresster from "../assets/forresster.png";
 import ebookAI from "../assets/ebookAI.avif";
 import ebook_info from "../assets/ebook_info.avif";
 
-// Sample card data per tab
-const cardData = {
+type CardItem = {
+  tt: string;
+  title: string;
+  description: string;
+  buttonText: string;
+  image: string;
+};
+
+const cardData: Record<string, CardItem[]> = {
   "Industry research": [
     {
       tt: "Report",
@@ -105,7 +112,7 @@ const Resources = () => {
       {/* Cards */}
       <SimpleGrid columns={{ base: 1, md: 2 }} spacing={6} minH="400px">
         {cards.length > 0 ? (
-          cards.map((card, index) => (
+          cards.map((card: CardItem, index: number) => (
             <Box
               key={index}
               bg="white"

@@ -6,6 +6,7 @@ import Banner from '../components/Banner';
 import NavBar2 from '../components/NavBar2';
 import AIPoweredSales from '../components/AIPoweredSales';
 import TextFooter from '../components/TextFooter';
+import Overview from '../components/Overview';
 
 const Layout = () => {
   return (
@@ -13,6 +14,7 @@ const Layout = () => {
        <NavBar />
        <Banner />
        <NavBar2 />
+       <Overview/>
        <AIPoweredSales />
        <Box padding={5}>
         <Outlet />

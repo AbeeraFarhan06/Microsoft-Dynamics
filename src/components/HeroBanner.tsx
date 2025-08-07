@@ -1,7 +1,19 @@
-import { Box, Button, Flex, Heading, Stack, Text } from '@chakra-ui/react'
+import { useState } from 'react'
+import {
+  Box,
+  Button,
+  Flex,
+  Heading,
+  Image,
+  Stack,
+  Text,
+} from '@chakra-ui/react'
 import { FaPlay } from 'react-icons/fa'
+import tmbnl from '../assets/tbmnl.avif'
 
 const HeroBanner = () => {
+  const [isPlaying, setIsPlaying] = useState(false)
+
   return (
     <Flex
       px={16}
@@ -56,9 +68,9 @@ const HeroBanner = () => {
             fontWeight="semibold"
             borderRadius="6px"
             mt={3}
-        >
+          >
             Take a guided tour
-        </Button>
+          </Button>
         </Stack>
       </Box>
 
@@ -79,25 +91,47 @@ const HeroBanner = () => {
           height="300px"
           position="relative"
         >
-          {/* Simulated video frame */}
-          <Box
-            w="100%"
-            h="100%"
-            bg="gray.300"
-            display="flex"
-            alignItems="center"
-            justifyContent="center"
-            position="relative"
-          >
-            <Button
-              bg="#2F4B7C"
-              borderRadius="full"
-              p={4}
-              _hover={{ bg: '#1C365C' }}
+          {isPlaying ? (
+            <Box
+              as="iframe"
+              src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1"
+              title="Intro Video"
+              width="100%"
+              height="100%"
+              allow="autoplay; encrypted-media"
+              allowFullScreen
+              border="0"
+            />
+          ) : (
+            <Box
+              w="100%"
+              h="100%"
+              display="flex"
+              alignItems="center"
+              justifyContent="center"
+              position="relative"
             >
-              <FaPlay color="white" />
-            </Button>
-          </Box>
+              <Image
+                src={tmbnl}
+                w="100%"
+                h="100%"
+                objectFit="cover"
+              />
+              <Button
+                position="absolute"
+                top="50%"
+                left="50%"
+                transform="translate(-50%, -50%)"
+                bg="#2F4B7C"
+                borderRadius="full"
+                p={4}
+                onClick={() => setIsPlaying(true)}
+                _hover={{ bg: '#1C365C' }}
+              >
+                <FaPlay color="white" />
+              </Button>
+            </Box>
+          )}
         </Box>
       </Box>
     </Flex>
