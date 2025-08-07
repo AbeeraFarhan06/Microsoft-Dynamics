@@ -10,10 +10,15 @@ import {
 } from "@chakra-ui/react";
 import { IoIosArrowForward } from "react-icons/io";
 import { useState } from "react";
+import { motion } from "framer-motion"; // ✨ Import motion
 import gartner from "../assets/gartner.png";
 import forresster from "../assets/forresster.png";
 import ebookAI from "../assets/ebookAI.avif";
 import ebook_info from "../assets/ebook_info.avif";
+
+// Framer Motion wrapper for Chakra
+const MotionBox = motion(Box);
+const MotionVStack = motion(VStack);
 
 type CardItem = {
   tt: string;
@@ -72,7 +77,17 @@ const Resources = () => {
 
   return (
     <Box py={16} px={{ base: 4, md: 12 }}>
-      <VStack spacing={2} align="start" mb={10} mt={14}>
+      {/* Animated Heading */}
+      <MotionVStack
+        spacing={2}
+        align="start"
+        mb={10}
+        mt={14}
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, ease: "easeOut" }}
+        viewport={{ once: true, amount: 0.3 }}
+      >
         <Text
           fontSize="13px"
           textTransform="uppercase"
@@ -84,7 +99,8 @@ const Resources = () => {
         <Heading fontSize="40px" fontWeight="medium" color="gray.800">
           What's new
         </Heading>
-      </VStack>
+      </MotionVStack>
+
       {/* Tabs */}
       <HStack spacing={4} wrap="wrap" mb={12}>
         {tabs.map((tab) => {
@@ -109,27 +125,29 @@ const Resources = () => {
         })}
       </HStack>
 
-      {/* Cards */}
+      {/* Cards with animation */}
       <SimpleGrid columns={{ base: 1, md: 2 }} spacing={6} minH="400px">
         {cards.length > 0 ? (
           cards.map((card: CardItem, index: number) => (
-            <Box
+            <MotionBox
               key={index}
               bg="white"
               borderRadius="20px"
               overflow="hidden"
               boxShadow="md"
-              transition="all 0.3s"
               display="flex"
               flexDirection="column"
               p={2}
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{
+                delay: index * 0.2,
+                duration: 0.6,
+                ease: "easeOut",
+              }}
+              viewport={{ once: true, amount: 0.2 }}
             >
-              <Box
-                p={1}
-                borderRadius="15px"
-                overflow="hidden"
-                _hover={{ img: { transform: "scale(1.1)" } }}
-              >
+              <Box p={1} borderRadius="15px" overflow="hidden">
                 <Image
                   src={card.image}
                   w="100%"
@@ -137,6 +155,7 @@ const Resources = () => {
                   objectFit="cover"
                   borderRadius="20px"
                   transition="transform 0.3s ease-in-out"
+                  _hover={{ transform: "scale(1.05)" }}
                 />
               </Box>
 
@@ -178,10 +197,9 @@ const Resources = () => {
                   </Text>
                 </Box>
               </Box>
-            </Box>
+            </MotionBox>
           ))
         ) : (
-          // Fallback message for empty tab
           <Box textAlign="center" py={20} color="gray.500" fontSize="lg">
             No resources available for this category yet.
           </Box>

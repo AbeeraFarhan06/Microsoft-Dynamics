@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import {
   Box,
   Button,
@@ -11,14 +11,16 @@ import {
   Collapse,
   Divider,
 } from "@chakra-ui/react";
+import { motion, useInView } from "framer-motion";
+
 import make_seller from "../assets/make_seller.png";
 import wow from "../assets/wow.png";
 import stronger from "../assets/stronger.png";
 
-// 1. Define a literal type for tab names
+// Literal type for tab names
 type TabKey = "Make selling easier" | "Wow your customers" | "Build stronger teams";
 
-// 2. Define the type for content values
+// Type for content values
 type ContentType = {
   [key in TabKey]: {
     sectionTitle: string;
@@ -27,7 +29,7 @@ type ContentType = {
   };
 };
 
-// 3. Provide tabs and content
+// Tabs and content
 const tabs: TabKey[] = [
   "Make selling easier",
   "Wow your customers",
@@ -55,12 +57,34 @@ const content: ContentType = {
   },
 };
 
+// Motion-enhanced Chakra UI components
+const MotionBox = motion(Box);
+const MotionVStack = motion(VStack);
+const MotionFlex = motion(Flex);
+
 const EmpowerSalesTeams = () => {
-  const [activeTab, setActiveTab] = useState<TabKey>(tabs[0]); // typed
+  const [activeTab, setActiveTab] = useState<TabKey>(tabs[0]);
+
+  // Scroll animation hooks
+  const headingRef = useRef(null);
+  const contentRef = useRef(null);
+
+  const headingInView = useInView(headingRef, { once: true });
+  const contentInView = useInView(contentRef, { once: true });
 
   return (
     <Box px={{ base: 4, md: 16 }} py={10}>
-      <VStack spacing={2} align="start" mb={10} mt={14}>
+      {/* Animated Heading Section */}
+      <MotionVStack
+        spacing={2}
+        align="start"
+        mb={10}
+        mt={14}
+        ref={headingRef}
+        initial={{ opacity: 0, y: 40 }}
+        animate={headingInView ? { opacity: 1, y: 0 } : {}}
+        transition={{ duration: 0.6 }}
+      >
         <Text
           fontSize="13px"
           textTransform="uppercase"
@@ -76,8 +100,9 @@ const EmpowerSalesTeams = () => {
           Help sales teams exceed customer expectations and reach their goals
           with an AI-powered CRM solution.
         </Text>
-      </VStack>
+      </MotionVStack>
 
+      {/* Tabs */}
       <Stack direction={{ base: "column", md: "row" }} spacing={4} mb={10}>
         {tabs.map((tab) => (
           <Button
@@ -98,7 +123,16 @@ const EmpowerSalesTeams = () => {
         ))}
       </Stack>
 
-      <Flex direction={{ base: "column", lg: "row" }} gap={10} align="center">
+      {/* Animated Content Section */}
+      <MotionFlex
+        ref={contentRef}
+        direction={{ base: "column", lg: "row" }}
+        gap={10}
+        align="center"
+        initial={{ opacity: 0, y: 50 }}
+        animate={contentInView ? { opacity: 1, y: 0 } : {}}
+        transition={{ duration: 0.6 }}
+      >
         <Box flex={1}>
           <VStack align="start" spacing={4}>
             <Heading size="md">{content[activeTab].sectionTitle}</Heading>
@@ -119,7 +153,7 @@ const EmpowerSalesTeams = () => {
             objectFit="contain"
           />
         </Box>
-      </Flex>
+      </MotionFlex>
     </Box>
   );
 };

@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 import {
   Box,
   Button,
@@ -10,17 +10,29 @@ import {
 } from '@chakra-ui/react'
 import { FaPlay } from 'react-icons/fa'
 import tmbnl from '../assets/tbmnl.avif'
+import { motion, useInView } from 'framer-motion'
+
+// Motion wrapper
+const MotionFlex = motion(Flex)
 
 const HeroBanner = () => {
   const [isPlaying, setIsPlaying] = useState(false)
 
+  // Scroll animation hook
+  const ref = useRef(null)
+  const inView = useInView(ref, { once: true })
+
   return (
-    <Flex
+    <MotionFlex
+      ref={ref}
       px={16}
       py={20}
       align="center"
       justify="space-between"
       flexWrap="wrap"
+      initial={{ opacity: 0, y: 60 }}
+      animate={inView ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.8 }}
     >
       {/* Left Section: Text and Buttons */}
       <Box flex="1" minW="300px" pr={{ base: 0, md: 12 }}>
@@ -134,8 +146,9 @@ const HeroBanner = () => {
           )}
         </Box>
       </Box>
-    </Flex>
+    </MotionFlex>
   )
 }
 
 export default HeroBanner
+

@@ -1,4 +1,18 @@
-import { Box, Button, Heading, SimpleGrid, Stack, Text } from '@chakra-ui/react'
+import {
+  Box,
+  Button,
+  Heading,
+  SimpleGrid,
+  Stack,
+  Text,
+} from '@chakra-ui/react'
+import { motion, useAnimation } from 'framer-motion'
+import { useInView } from 'react-intersection-observer'
+import { useEffect } from 'react'
+
+// Motion wrappers
+const MotionBox = motion(Box)
+const MotionStack = motion(Stack)
 
 const pricingPlans = [
   {
@@ -6,29 +20,63 @@ const pricingPlans = [
     description: 'Core sales force automation and Microsoft 365 integration',
     price: '$65.00',
     subtext: 'user/month, paid yearly',
-    buttons: ['Buy now', 'Contact us']
+    buttons: ['Buy now', 'Contact us'],
   },
   {
     title: 'Dynamics 365 Sales Enterprise Edition',
-    description: 'Industry-leading sales force automation with contextual insights, next-generation AI, and advanced customization',
+    description:
+      'Industry-leading sales force automation with contextual insights, next-generation AI, and advanced customization',
     price: '$105.00',
     subtext: 'user/month, paid yearly',
-    buttons: ['Buy now', 'Contact us']
+    buttons: ['Buy now', 'Contact us'],
   },
   {
     title: 'Dynamics 365 Sales Premium',
-    description: 'Dynamics 365 Sales Enterprise plus prebuilt customizable intelligence solutions for sellers and managers',
+    description:
+      'Dynamics 365 Sales Enterprise plus prebuilt customizable intelligence solutions for sellers and managers',
     price: '$150.00',
     subtext: 'user/month, paid yearly',
-    buttons: ['Contact us']
-  }
+    buttons: ['Contact us'],
+  },
 ]
 
 const PricingSection = () => {
+  const controls = useAnimation()
+  const [ref, inView] = useInView({ threshold: 0.2 })
+
+  useEffect(() => {
+    if (inView) {
+      controls.start('visible')
+    }
+  }, [controls, inView])
+
   return (
-    <Box  py={10} p={12} mt={10}>
-      <Stack spacing={4} textAlign="center" mb={10}>
-        <Text color="#a9a8a8" fontWeight="semibold" textTransform="uppercase" fontSize="sm">
+    <Box py={10} p={12} mt={10} ref={ref}>
+      {/* Header Animation */}
+      <MotionStack
+        spacing={4}
+        textAlign="center"
+        mb={10}
+        initial="hidden"
+        animate={controls}
+        variants={{
+          hidden: { opacity: 0, y: 50 },
+          visible: {
+            opacity: 1,
+            y: 0,
+            transition: {
+              duration: 0.6,
+              ease: 'easeOut',
+            },
+          },
+        }}
+      >
+        <Text
+          color="#a9a8a8"
+          fontWeight="semibold"
+          textTransform="uppercase"
+          fontSize="sm"
+        >
           Pricing
         </Text>
         <Heading fontSize="4xl" fontWeight="semibold" color="gray.800">
@@ -48,17 +96,32 @@ const PricingSection = () => {
         >
           See pricing details
         </Button>
-      </Stack>
+      </MotionStack>
 
+      {/* Cards Animation */}
       <SimpleGrid columns={{ base: 1, md: 3 }} spacing={7}>
-        {pricingPlans.map((plan) => (
-          <Box
+        {pricingPlans.map((plan, index) => (
+          <MotionBox
             key={plan.title}
             bg="white"
             borderRadius="20px"
             p={6}
             boxShadow="lg"
             textAlign="left"
+            initial="hidden"
+            animate={controls}
+            variants={{
+              hidden: { opacity: 0, y: 40 },
+              visible: {
+                opacity: 1,
+                y: 0,
+                transition: {
+                  delay: 0.3 + index * 0.2,
+                  duration: 0.6,
+                  ease: 'easeOut',
+                },
+              },
+            }}
           >
             <Text fontSize="lg" fontWeight="semibold" mb={4}>
               {plan.title}
@@ -100,7 +163,7 @@ const PricingSection = () => {
                 Contact us
               </Button>
             </Stack>
-          </Box>
+          </MotionBox>
         ))}
       </SimpleGrid>
     </Box>
@@ -108,3 +171,4 @@ const PricingSection = () => {
 }
 
 export default PricingSection
+

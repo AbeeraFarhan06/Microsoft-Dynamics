@@ -7,8 +7,12 @@ import {
   Text,
   Image,
 } from "@chakra-ui/react";
+import { motion } from "framer-motion";
 import AI_bg from "../assets/AI_bg.avif";
 import persons from "../assets/persons.avif";
+
+// Motion-enhanced Chakra component
+const MotionBox = motion(Box);
 
 const AIPoweredSales = () => {
   return (
@@ -22,7 +26,6 @@ const AIPoweredSales = () => {
       position="relative"
       zIndex="0"
     >
-      {/* Wrapper Flex centered vertically */}
       <Flex
         position="absolute"
         top="50%"
@@ -30,23 +33,38 @@ const AIPoweredSales = () => {
         transform="translate(-50%, -50%)"
         width="85%"
         justify="space-between"
-        align="flex-start"  // align to top so text can move independently
+        align="flex-start"
         gap={10}
+        flexWrap="wrap"
       >
-        {/* LEFT Section: Image */}
-        <Box
+        {/* Image with bottom-to-top animation */}
+        <MotionBox
           flex="1"
           minW="300px"
           maxW="600px"
           borderRadius="xl"
           overflow="hidden"
           bg="white"
+          initial={{ opacity: 0, y: 60 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
         >
-          <Image src={persons} />
-        </Box>
+          <Image src={persons} alt="People working" />
+        </MotionBox>
 
-        {/* RIGHT Section: Text and Buttons with padding to move it down */}
-        <Box flex="1" minW="250px" maxW="500px" pt={1} ml={16}> {/* Move text down here */}
+        {/* Text with bottom-to-top animation */}
+        <MotionBox
+          flex="1"
+          minW="250px"
+          maxW="500px"
+          pt={1}
+          ml={16}
+          initial={{ opacity: 0, y: 60 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+        >
           <Text
             fontSize="12px"
             fontWeight="semibold"
@@ -99,11 +117,10 @@ const AIPoweredSales = () => {
           >
             Get the e-book
           </Button>
-        </Box>
+        </MotionBox>
       </Flex>
     </Box>
   );
 };
 
 export default AIPoweredSales;
-
