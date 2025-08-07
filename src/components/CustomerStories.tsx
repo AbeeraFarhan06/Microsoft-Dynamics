@@ -266,10 +266,10 @@ export default function CustomerStories() {
                 {selectedId === card.id && (
                   <Box
                     position="absolute"
-                    bottom="-8px"
+                    bottom="-40px"
                     left="50%"
                     transform="translateX(-50%)"
-                    height="4px"
+                    height="5px"
                     width="100%"
                     bg="#243B65"
                     borderRadius="full"

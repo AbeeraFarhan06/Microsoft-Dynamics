@@ -2,6 +2,8 @@ import { Grid, GridItem } from '@chakra-ui/react';
 import Pricing from '../components/Pricing';
 import Partners from '../components/Partners';
 import CustomerStories from '../components/CustomerStories';
+import Resources from '../components/Resources';
+import TextFooter from '../components/TextFooter';
 
 const HomePage = () => {
   return (
@@ -19,6 +21,7 @@ const HomePage = () => {
        <Pricing />
        <Partners />
        <CustomerStories />
+       <Resources />
       </GridItem>
     </Grid>
   );

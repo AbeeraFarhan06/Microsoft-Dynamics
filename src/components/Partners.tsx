@@ -62,7 +62,7 @@ const PartnerCards = () => {
             transition="all 0.3s"
           >
             {/* Image with padding and radius */}
-            <Box p={2} borderRadius="20px" overflow="hidden">
+            <Box p={2} borderRadius="15px" overflow="hidden">
               <Image
                 src={card.image}
                 alt={card.title}

@@ -5,8 +5,7 @@ import Footer from '../components/Footer';
 import Banner from '../components/Banner';
 import NavBar2 from '../components/NavBar2';
 import AIPoweredSales from '../components/AIPoweredSales';
-import Pricing from '../components/Pricing';
-import Partners from '../components/Partners';
+import TextFooter from '../components/TextFooter';
 
 const Layout = () => {
   return (
@@ -18,6 +17,7 @@ const Layout = () => {
        <Box padding={5}>
         <Outlet />
        </Box>
+       <TextFooter/>
        <Footer />
     </>
   );
