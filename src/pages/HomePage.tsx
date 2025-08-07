@@ -4,6 +4,7 @@ import Partners from '../components/Partners';
 import CustomerStories from '../components/CustomerStories';
 import Resources from '../components/Resources';
 import TextFooter from '../components/TextFooter';
+import Nextstep from '../components/NextStep';
 
 const HomePage = () => {
   return (
@@ -22,6 +23,7 @@ const HomePage = () => {
        <Partners />
        <CustomerStories />
        <Resources />
+       <Nextstep/>
       </GridItem>
     </Grid>
   );
