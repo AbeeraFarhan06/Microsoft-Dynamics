@@ -87,7 +87,7 @@ export default function CustomerStories() {
   const cardInView = useInView(cardRef, { once: true });
 
   return (
-    <Box py={12} px={{ base: 4, md: 12 }}>
+    <Box id="Customer-stories" py={12} px={{ base: 4, md: 12 }}>
       {/* Text with animation */}
       <VStack spacing={2} align="start" mb={10} mt={14} ref={textRef}>
         <motion.div

@@ -17,6 +17,7 @@ const MotionBox = motion(Box);
 const AIPoweredSales = () => {
   return (
     <Box
+      id="AI-powered-sales"
       bgImage={AI_bg}
       bgSize="cover"
       bgPosition="top"

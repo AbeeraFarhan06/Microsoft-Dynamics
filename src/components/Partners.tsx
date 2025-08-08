@@ -44,7 +44,7 @@ const PartnerCards = () => {
   ];
 
   return (
-    <Box py={16} px={{ base: 4, md: 12 }}>
+    <Box id="Partners" py={16} px={{ base: 4, md: 12 }}>
       {/* Animated Heading */}
       <MotionVStack
         spacing={2}

@@ -51,7 +51,7 @@ const PricingSection = () => {
   }, [controls, inView])
 
   return (
-    <Box py={10} p={12} mt={10} ref={ref}>
+    <Box id="Pricing" py={10} p={12} mt={10} ref={ref}>
       {/* Header Animation */}
       <MotionStack
         spacing={4}

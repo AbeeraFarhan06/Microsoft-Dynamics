@@ -23,7 +23,7 @@ const MotionGridItem = motion(Box); // GridItem doesn't accept motion directly
 
 const Nextstep = () => {
   return (
-    <Box bg="#f5f5f5" minH="100vh" p={12} mb={4}>
+    <Box id="Next-steps" bg="#f5f5f5" minH="100vh" p={12} mb={4}>
       {/* Top Section with Animation */}
       <MotionBox
         bg="white"

@@ -14,21 +14,24 @@ const menuItems = [
 const NavBar2 = () => {
   const [activeItem, setActiveItem] = useState('Overview')
 
+  const handleScroll = (item: string) => {
+    setActiveItem(item)
+    const sectionId = item.replace(/\s+/g, '-')
+    const element = document.getElementById(sectionId)
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' })
+    }
+  }
+
   return (
-    <Box
-      position="sticky"
-      top="0"
-      zIndex="999"
-      bg="white"
-      boxShadow="sm"
-    >
+    <Box position="sticky" top="0" zIndex="999" bg="white" boxShadow="sm">
       <Flex
         as="nav"
         justify="space-between"
         align="center"
         px={16}
         py={2}
-        borderTop="1px solid #e2e8f0" 
+        borderTop="1px solid #e2e8f0"
         borderBottom="1px solid #e2e8f0"
       >
         <HStack spacing="50px">
@@ -38,7 +41,7 @@ const NavBar2 = () => {
               position="relative"
               pb={1}
               cursor="pointer"
-              onClick={() => setActiveItem(item)}
+              onClick={() => handleScroll(item)}
               _hover={{ color: 'blue.800' }}
             >
               <Text
@@ -85,4 +88,3 @@ const NavBar2 = () => {
 }
 
 export default NavBar2
-

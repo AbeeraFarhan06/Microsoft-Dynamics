@@ -73,7 +73,7 @@ const EmpowerSalesTeams = () => {
   const contentInView = useInView(contentRef, { once: true });
 
   return (
-    <Box px={{ base: 4, md: 16 }} py={10}>
+    <Box  id="Overview" px={{ base: 4, md: 16 }} py={10}>
       {/* Animated Heading Section */}
       <MotionVStack
         spacing={2}
