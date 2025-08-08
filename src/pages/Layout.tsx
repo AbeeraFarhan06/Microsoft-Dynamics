@@ -7,6 +7,7 @@ import NavBar2 from '../components/NavBar2';
 import AIPoweredSales from '../components/AIPoweredSales';
 import TextFooter from '../components/TextFooter';
 import Overview from '../components/Overview';
+import ContactBar from '../components/ContactBar';
 
 const Layout = () => {
   return (
@@ -19,6 +20,7 @@ const Layout = () => {
        <Box padding={5}>
         <Outlet />
        </Box>
+       <ContactBar/>
        <TextFooter/>
        <Footer />
     </>
