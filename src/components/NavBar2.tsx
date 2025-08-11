@@ -1,5 +1,5 @@
 import { Box, Button, Flex, HStack, Text } from '@chakra-ui/react'
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 const menuItems = [
   'Overview',
@@ -13,15 +13,57 @@ const menuItems = [
 
 const NavBar2 = () => {
   const [activeItem, setActiveItem] = useState('Overview')
+  const isClickScrolling = useRef(false) // Lock during click scroll
 
   const handleScroll = (item: string) => {
     setActiveItem(item)
+    isClickScrolling.current = true
     const sectionId = item.replace(/\s+/g, '-')
     const element = document.getElementById(sectionId)
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' })
     }
+
+    // Release lock after scroll finishes
+    setTimeout(() => {
+      isClickScrolling.current = false
+    }, 800)
   }
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (isClickScrolling.current) return // Skip during click scroll
+
+        // Find the entry closest to the top of the viewport
+        const visibleEntry = entries
+          .filter((entry) => entry.isIntersecting)
+          .sort(
+            (a, b) => a.boundingClientRect.top - b.boundingClientRect.top
+          )[0]
+
+        if (visibleEntry) {
+          const visibleId = visibleEntry.target.id.replace(/-/g, ' ')
+          const formattedName =
+            visibleId.charAt(0).toUpperCase() + visibleId.slice(1)
+          setActiveItem(formattedName)
+        }
+      },
+      {
+        root: null,
+        rootMargin: '-20% 0px -70% 0px', // triggers earlier for short sections
+        threshold: 0,
+      }
+    )
+
+    menuItems.forEach((item) => {
+      const sectionId = item.replace(/\s+/g, '-')
+      const element = document.getElementById(sectionId)
+      if (element) observer.observe(element)
+    })
+
+    return () => observer.disconnect()
+  }, [])
 
   return (
     <Box position="sticky" top="0" zIndex="999" bg="white" boxShadow="sm">
