@@ -1,7 +1,11 @@
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
 
-// https://vitejs.dev/config/
-export default defineConfig({
+// Change this to your repo name
+const repoName = 'Microsoft-Dynamics';
+
+export default defineConfig(({ mode }) => ({
   plugins: [react()],
-})
+  base: mode === 'production' ? `/${repoName}/` : '/',
+}));
+
