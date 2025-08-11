@@ -15,9 +15,9 @@ const router = createBrowserRouter(
       ],
     },
   ],
-//   {
-//     basename: "/Microsoft-Dynamics",
-//   }
+  {
+    basename: "/Microsoft-Dynamics",
+  }
 );
 
 export default router;
