@@ -6,6 +6,6 @@ const repoName = 'Microsoft-Dynamics';
 
 export default defineConfig(({ mode }) => ({
   plugins: [react()],
-  base: mode === 'production' ? `/${repoName}/` : '/',
+  base: mode === 'production' ? `/$Microsoft-Dynamics/` : '/',
 }));
 
