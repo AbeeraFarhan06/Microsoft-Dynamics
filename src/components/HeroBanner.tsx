@@ -25,28 +25,28 @@ const HeroBanner = () => {
   return (
     <MotionFlex
       ref={ref}
-      px={16}
-      py={20}
+      px={{ base: 16, md: 16 }}
+      py={{ base: 10, md: 20 }}
       align="center"
       justify="space-between"
-      flexWrap="wrap"
+      flexDirection={{ base: 'column', lg: 'row' }} // Stack on mobile/tablet, row on large
       initial={{ opacity: 0, y: 60 }}
       animate={inView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.8 }}
     >
       {/* Left Section: Text and Buttons */}
-      <Box flex="1" minW="300px" pr={{ base: 0, md: 12 }}>
+      <Box flex="1" minW="300px" pr={{ base: 0, lg: 12 }}>
         <Heading
-          fontSize="2.7rem"
+          fontSize={{ base: '2.4rem', md: '2.7rem' }}
           fontWeight="500"
           color="#1B1B1B"
-          mb={7}
-          lineHeight="3rem"
+          mb={{base: 5, md: 7}}
+          lineHeight={{ base: '2.4rem', md: '3rem' }}
         >
           Dynamics 365 Sales
         </Heading>
 
-        <Text fontSize="lg" color="#2B2B2B" mb={6}>
+        <Text fontSize="lg" color="#2B2B2B" mb={{base: 3, md: 6}}>
           Close more deals and increase seller efficiency with an AI-powered CRM solution.
         </Text>
 
@@ -61,7 +61,7 @@ const HeroBanner = () => {
             px={6}
             py={6}
             mt={3}
-            ml="3"
+            ml={{ base: 0, sm: '3' }}
             borderRadius="md"
             _hover={{ bg: '#243B65' }}
           >
@@ -90,17 +90,18 @@ const HeroBanner = () => {
       <Box
         flex="1"
         minW="300px"
-        mt={{ base: 10, md: 0 }}
+        mt={{ base: 2, lg: 0 }} // Margin top only when stacked
         position="relative"
         borderRadius="xl"
         overflow="hidden"
         p={2}
+        w="100%"
       >
         <Box
           bg="white"
           borderRadius="xl"
           overflow="hidden"
-          height="300px"
+          height={{ base: '280px', md: '300px' }}
           position="relative"
         >
           {isPlaying ? (
@@ -151,4 +152,3 @@ const HeroBanner = () => {
 }
 
 export default HeroBanner
-

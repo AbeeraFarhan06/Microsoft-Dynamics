@@ -156,7 +156,7 @@ const Navbar = () => {
           // ✅ Mobile Layout
           <>
             {/* Row 1 */}
-            <Box borderBottom="1px solid" borderColor="gray.200" pb={3} w="100%">
+            <Box borderBottom="1px solid" borderColor="gray.200" w="100%" py={6}>
               <Flex justify="space-between" align="center" position="relative" px={4}>
                     <Box position="absolute" left="50%" transform="translateX(-50%)">
                       <Image src={microsoft_logo} h="24px" w="107px" cursor="pointer" />
@@ -165,7 +165,7 @@ const Navbar = () => {
             </Box>
 
             {/* Row 2 with "Copilot" dropdown accordion menu */}
-            <Box borderBottom="1px solid" borderColor="gray.200" pb={2} w="100%">
+            <Box borderBottom="1px solid" borderColor="gray.200" w="100%" >
               <Box px={4}>
                 <Menu isLazy matchWidth>
                   {({ isOpen }) => (
@@ -173,9 +173,7 @@ const Navbar = () => {
                       <MenuButton
                         as={Flex}
                         align="center"
-                        mt={1}
-                        gap={1}
-                        fontSize="md"
+                        fontSize="15px"
                         fontWeight="semibold"
                         cursor="pointer"
                         _hover={{ color: 'gray.700' }}

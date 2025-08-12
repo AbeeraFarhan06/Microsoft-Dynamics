@@ -1,4 +1,5 @@
 import { Box, Button, Flex, HStack, Text } from '@chakra-ui/react'
+import { ChevronDownIcon, ChevronUpIcon } from '@chakra-ui/icons'
 import { useEffect, useRef, useState } from 'react'
 
 const menuItems = [
@@ -13,7 +14,8 @@ const menuItems = [
 
 const NavBar2 = () => {
   const [activeItem, setActiveItem] = useState('Overview')
-  const isClickScrolling = useRef(false) // Lock during click scroll
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const isClickScrolling = useRef(false)
 
   const handleScroll = (item: string) => {
     setActiveItem(item)
@@ -23,8 +25,7 @@ const NavBar2 = () => {
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' })
     }
-
-    // Release lock after scroll finishes
+    setIsMobileMenuOpen(false) // close menu after click
     setTimeout(() => {
       isClickScrolling.current = false
     }, 800)
@@ -33,14 +34,11 @@ const NavBar2 = () => {
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
-        if (isClickScrolling.current) return // Skip during click scroll
+        if (isClickScrolling.current) return
 
-        // Find the entry closest to the top of the viewport
         const visibleEntry = entries
           .filter((entry) => entry.isIntersecting)
-          .sort(
-            (a, b) => a.boundingClientRect.top - b.boundingClientRect.top
-          )[0]
+          .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top)[0]
 
         if (visibleEntry) {
           const visibleId = visibleEntry.target.id.replace(/-/g, ' ')
@@ -51,7 +49,7 @@ const NavBar2 = () => {
       },
       {
         root: null,
-        rootMargin: '-20% 0px -70% 0px', // triggers earlier for short sections
+        rootMargin: '-20% 0px -70% 0px',
         threshold: 0,
       }
     )
@@ -67,6 +65,7 @@ const NavBar2 = () => {
 
   return (
     <Box position="sticky" top="0" zIndex="999" bg="white" boxShadow="sm">
+      {/* Desktop Navbar */}
       <Flex
         as="nav"
         justify="space-between"
@@ -75,6 +74,7 @@ const NavBar2 = () => {
         py={2}
         borderTop="1px solid #e2e8f0"
         borderBottom="1px solid #e2e8f0"
+        display={{ base: 'none', lg: 'flex' }}
       >
         <HStack spacing="50px">
           {menuItems.map((item) => (
@@ -93,7 +93,6 @@ const NavBar2 = () => {
               >
                 {item}
               </Text>
-
               {activeItem === item && (
                 <Box
                   position="absolute"
@@ -110,6 +109,7 @@ const NavBar2 = () => {
           ))}
         </HStack>
 
+        {/* Try for free button - Only desktop */}
         <Button
           bg="#2F4B7C"
           color="white"
@@ -125,6 +125,65 @@ const NavBar2 = () => {
           Try for free
         </Button>
       </Flex>
+
+      {/* Mobile Navbar Header */}
+      <Box
+        display={{ base: 'block', lg: 'none' }}
+        w="100%"
+        borderBottom="4px solid"
+        borderColor="blue.900"
+        py={3}
+        px={6}
+        bg="white"
+      >
+        <Flex
+          justify="space-between"
+          align="center"
+          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          cursor="pointer"
+        >
+          <Text fontSize="14px" fontWeight="medium" color="blue.900">
+            {activeItem}
+          </Text>
+          {isMobileMenuOpen ? (
+            <ChevronUpIcon color="blue.900" boxSize={5} />
+          ) : (
+            <ChevronDownIcon color="blue.900" boxSize={5} />
+          )}
+        </Flex>
+      </Box>
+
+      {/* Mobile Dropdown Menu */}
+      {isMobileMenuOpen && (
+        <Box display={{ base: 'block', lg: 'none' }} bg="white" px={6} py={2}>
+          {menuItems.map((item) => (
+            <Box
+              key={item}
+              py={2}
+              px={2}
+              borderRadius="md"
+              cursor="pointer"
+              bg={activeItem === item ? 'gray.200' : 'transparent'}
+              display="flex"
+              alignItems="center"
+              onClick={() => handleScroll(item)}
+            >
+              {activeItem === item && (
+                <Box
+                  w="4px"
+                  h="20px"
+                  bg="blue.900"
+                  borderRadius="full"
+                  mr={3}
+                />
+              )}
+              <Text fontSize="14px" color="blue.900">
+                {item}
+              </Text>
+            </Box>
+          ))}
+        </Box>
+      )}
     </Box>
   )
 }
